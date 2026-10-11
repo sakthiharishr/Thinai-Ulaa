@@ -585,7 +585,15 @@ def _calculate_route_distance(
     if start_place:
         route.append(start_place)
 
-    route.extend(places)
+    for p in (places or []):
+        if (
+            start_place
+            and p.get("place_id") is not None
+            and p.get("place_id") == start_place.get("place_id")
+            and len(route) == 1
+        ):
+            continue
+        route.append(p)
 
     total_distance = 0.0
 
@@ -607,6 +615,8 @@ def _calculate_route_distance(
             total_distance += float(
                 distance
             )
+        elif first.get("place_id") != second.get("place_id"):
+            total_distance += 25.0
 
     return round(
         total_distance,
@@ -621,6 +631,7 @@ def _calculate_budget(
     budget_level,
     start_place=None,
     distance_km=None,
+    daily_distances=None,
 ):
     nights = max(
         0,
@@ -655,6 +666,8 @@ def _calculate_budget(
         miscellaneous_cost_per_day=rules[
             "miscellaneous_per_day"
         ],
+        budget_level=budget_level,
+        daily_distances=daily_distances,
     )
 
     return budget, distance_km
@@ -818,6 +831,10 @@ def _run_itinerary_generation(
     # --------------------------------------------------------
 
     try:
+        daily_distances = [
+            float(day.get("drive_km", 0.0))
+            for day in plan.get("days", [])
+        ]
         budget, distance_km = (
             _calculate_budget(
                 planned_places,
@@ -825,7 +842,8 @@ def _run_itinerary_generation(
                 days,
                 budget_level,
                 starting_place,
-                distance_km=plan["total_km"],
+                distance_km=plan.get("total_km"),
+                daily_distances=daily_distances,
             )
         )
 

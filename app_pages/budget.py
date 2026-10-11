@@ -66,16 +66,29 @@ def _route_distance(places, starting_place=None):
     route = []
     if starting_place:
         route.append(starting_place)
-    route.extend(places)
+    for p in (places or []):
+        if (
+            starting_place
+            and p.get("place_id") is not None
+            and p.get("place_id") == starting_place.get("place_id")
+            and len(route) == 1
+        ):
+            continue
+        route.append(p)
 
     total = 0.0
     for first, second in zip(route, route[1:]):
-        distance = calculate_distance(
-            first.get("latitude"), first.get("longitude"),
-            second.get("latitude"), second.get("longitude"),
-        )
+        try:
+            distance = calculate_distance(
+                first.get("latitude"), first.get("longitude"),
+                second.get("latitude"), second.get("longitude"),
+            )
+        except Exception:
+            distance = None
         if distance is not None:
             total += distance
+        elif first.get("place_id") != second.get("place_id"):
+            total += 25.0
     return round(total, 2)
 
 

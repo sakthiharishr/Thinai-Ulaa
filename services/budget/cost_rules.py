@@ -1,37 +1,103 @@
+"""Cost rules and transportation pricing configuration for Tamil Nadu tourism."""
+
+# Approximate planning estimates for Tamil Nadu travel budgeting.
+# All rates are configurable for future adjustments.
 COST_RULES = {
-    # Indicative Coimbatore cab/day-package assumptions. These are
-    # estimates, not live booking prices. The calculator also applies
-    # included kilometres and driver allowance instead of pretending that
-    # every cab charges a flat per-km rate.
+    # Transportation base rates per kilometre:
+    # - budget: Public bus / transit rate per passenger-km (₹2.5/km)
+    # - standard: WagonR / 5-seater cab default rate (₹12/km, range: ₹10–₹15/km)
+    # - premium: Innova / premium SUV default rate (₹18/km, range: ₹16–₹22/km)
     "transport": {
-        "budget": 11.0,
+        "budget": 2.5,
         "standard": 12.0,
-        "premium": 17.0,
+        "premium": 18.0,
     },
-    "transport_package": {
+    # Detailed transportation configuration per tier
+    "transport_config": {
         "budget": {
-            "vehicle": "Sedan",
-            "capacity": 4,
-            "base_per_day": 2250.0,
-            "included_km_per_day": 100.0,
-            "extra_km_rate": 11.0,
-            "driver_allowance_per_day": 350.0,
+            "mode": "public_transit",
+            "vehicle": "Public Bus / Transit",
+            "capacity": 40,
+            "min_rate_per_km": 2.0,
+            "max_rate_per_km": 3.0,
+            "default_rate_per_km": 2.5,
+            "daily_min_km": 0.0,
+            "driver_allowance_per_day": 0.0,
+            "waiting_charges_per_day": 0.0,
+            "tolls_parking_per_day": 0.0,
+            "min_fare_per_person": 30.0,
+            "description": "Public bus / train transit (minimal economical option)",
         },
         "standard": {
-            "vehicle": "Sedan",
+            "mode": "cab",
+            "vehicle": "WagonR / 5-Seater Cab",
             "capacity": 4,
-            "base_per_day": 2700.0,
+            "min_rate_per_km": 10.0,
+            "max_rate_per_km": 15.0,
+            "default_rate_per_km": 12.0,
+            "daily_min_km": 250.0,
+            "driver_allowance_per_day": 400.0,  # Configurable range: ₹300–₹600
+            "waiting_charges_per_day": 200.0,
+            "tolls_parking_per_day": 200.0,
+            "fixed_package": {
+                "name": "Local/Daily Rental Package",
+                "base_per_day": 2200.0,
+                "included_km_per_day": 100.0,
+                "extra_km_rate": 12.0,
+                "driver_included": True,
+                "waiting_included": True,
+                "tolls_parking_included": False,
+            },
+            "description": "WagonR or similar small 5-seater cab",
+        },
+        "premium": {
+            "mode": "cab",
+            "vehicle": "Innova / Premium SUV",
+            "capacity": 6,
+            "min_rate_per_km": 16.0,
+            "max_rate_per_km": 22.0,
+            "default_rate_per_km": 18.0,
+            "daily_min_km": 250.0,
+            "driver_allowance_per_day": 500.0,  # Configurable range: ₹300–₹600
+            "waiting_charges_per_day": 300.0,
+            "tolls_parking_per_day": 350.0,
+            "fixed_package": {
+                "name": "Local/Daily Rental Package",
+                "base_per_day": 4000.0,
+                "included_km_per_day": 100.0,
+                "extra_km_rate": 18.0,
+                "driver_included": True,
+                "waiting_included": True,
+                "tolls_parking_included": False,
+            },
+            "description": "Innova or similar premium SUV (6-seater)",
+        },
+    },
+    # Backward compatible transport_package dictionary
+    "transport_package": {
+        "budget": {
+            "vehicle": "Public Bus / Transit",
+            "capacity": 40,
+            "base_per_day": 0.0,
+            "included_km_per_day": 0.0,
+            "extra_km_rate": 2.5,
+            "driver_allowance_per_day": 0.0,
+        },
+        "standard": {
+            "vehicle": "WagonR / 5-Seater Cab",
+            "capacity": 4,
+            "base_per_day": 2200.0,
             "included_km_per_day": 100.0,
             "extra_km_rate": 12.0,
             "driver_allowance_per_day": 400.0,
         },
         "premium": {
-            "vehicle": "Innova Crysta",
-            "capacity": 7,
-            "base_per_day": 4800.0,
+            "vehicle": "Innova / Premium SUV",
+            "capacity": 6,
+            "base_per_day": 4000.0,
             "included_km_per_day": 100.0,
-            "extra_km_rate": 17.0,
-            "driver_allowance_per_day": 400.0,
+            "extra_km_rate": 18.0,
+            "driver_allowance_per_day": 500.0,
         },
     },
     "food_per_person_per_day": {
@@ -50,7 +116,6 @@ COST_RULES = {
         "premium": 400.0,
     },
 }
-
 
 BUDGET_LEVELS = [
     "budget",
@@ -83,6 +148,15 @@ def get_budget_rules(budget_level="standard"):
         )
         for category, values in COST_RULES.items()
     }
+
+
+def get_transport_config(budget_level="standard"):
+    if budget_level not in BUDGET_LEVELS:
+        budget_level = "standard"
+    return COST_RULES["transport_config"].get(
+        budget_level,
+        COST_RULES["transport_config"]["standard"],
+    )
 
 
 def calculate_estimated_daily_cost(
