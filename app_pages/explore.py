@@ -2,7 +2,6 @@ import streamlit as st
 
 from database.queries import (
     get_all_categories,
-    search_places,
 )
 from services.data_updates import refresh_tourism_data
 from services.location.current_location import clear_current_location, get_current_location, set_current_location
@@ -10,7 +9,6 @@ from services.location.geocoding import geocode_location
 from services.search.start_search import start_search
 from ui.components.map_view import render_map_view
 from ui.components.place_grid import render_place_grid
-from ui.components.search_bar import render_search_bar
 from ui.components.hero_visual import render_hero_3d_showcase
 from ui.components.scroll_row import render_scroll_row
 from ui.components.category_showcase import render_category_showcase
@@ -82,8 +80,6 @@ def _run_nearby_search(location, label):
 
 def render_explore_page():
     _render_editorial_hero()
-
-    search_query = render_search_bar()
 
     st.markdown('<div class="ghost-toolbar-label reveal">Find destinations near you</div>', unsafe_allow_html=True)
     col_manual, col_gps, col_refresh = st.columns([4, 1, 1])
@@ -189,8 +185,6 @@ def render_explore_page():
     nearby_results = st.session_state.get("nearby_results")
     if nearby_results:
         places = nearby_results
-    elif search_query:
-        places = [dict(place) for place in search_places(search_query, limit=300)]
     else:
         places = load_places()
 
@@ -212,16 +206,15 @@ def render_explore_page():
         )
         return
 
-    # A specific search / nearby / category filter is a lookup, best served
+    # A specific nearby / category filter is a lookup, best served
     # by a plain result list. The default, unfiltered browse is where the
     # editorial horizontal-row treatment belongs.
     is_default_browse = (
-        not search_query
-        and not nearby_results
+        not nearby_results
         and selected_category == "All Categories"
     )
 
-    if not search_query and not nearby_results:
+    if not nearby_results:
         current = None if selected_category == "All Categories" else selected_category
         render_category_showcase(load_places(), selected=current)
 
