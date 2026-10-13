@@ -272,8 +272,12 @@ body.js-scroll-ready .reveal-3d.in-view {
    GLOBAL APPLICATION
    ========================================================= */
 
-.stApp {
-    background: var(--bg);
+.stApp,
+[data-testid="stAppViewContainer"],
+[data-testid="stMain"] {
+    background-color: var(--bg) !important;
+    color: var(--text-primary) !important;
+    color-scheme: light !important;
 }
 
 .main {
@@ -291,7 +295,7 @@ body.js-scroll-ready .reveal-3d.in-view {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: var(--text-primary);
+    color: var(--text-primary) !important;
     letter-spacing: -0.01em;
 }
 
@@ -753,8 +757,13 @@ p, span, div, label {
    ========================================================= */
 
 .stTextInput input,
-.stNumberInput input {
+.stNumberInput input,
+.stTextArea textarea {
     border-radius: var(--radius-sm);
+    background-color: var(--surface) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-strong) !important;
+    color-scheme: light !important;
 }
 
 .stSelectbox div {
@@ -763,30 +772,58 @@ p, span, div, label {
 
 .stTextInput input,
 .stNumberInput input,
+.stTextArea textarea,
 .stSelectbox > div > div,
 .stMultiSelect > div > div,
 [data-baseweb="select"] > div {
     transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    background-color: var(--surface) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-strong) !important;
+    color-scheme: light !important;
 }
 
+[data-baseweb="select"] input {
+    color: var(--text-primary) !important;
+}
+
+[data-baseweb="select"] * {
+    color: var(--text-primary);
+}
+
+[data-baseweb="select"] svg {
+    fill: var(--text-secondary) !important;
+}
+
+div[data-baseweb="popover"],
+div[data-baseweb="menu"],
+ul[role="listbox"],
+li[role="option"] {
+    background-color: var(--surface) !important;
+    color: var(--text-primary) !important;
+    color-scheme: light !important;
+}
+
+li[role="option"]:hover,
+li[role="option"][aria-selected="true"] {
+    background-color: var(--accent-soft) !important;
+    color: var(--accent-strong) !important;
+}
 
 /* =========================================================
    SEARCH INPUT
    ========================================================= */
 
 [data-testid="stTextInput"] input {
-    border: 1px solid var(--border-strong);
-
-    background: var(--surface);
-
-    color: var(--text-primary);
-
+    border: 1px solid var(--border-strong) !important;
+    background: var(--surface) !important;
+    color: var(--text-primary) !important;
     padding: 0.7rem 0.9rem;
+    color-scheme: light !important;
 }
 
 [data-testid="stTextInput"] input:focus {
-    border-color: var(--accent);
-
+    border-color: var(--accent) !important;
     box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
@@ -1693,3 +1730,64 @@ hr {
     font-size: 13px;
     color: var(--text-secondary, #64748b);
 }
+
+/* =========================================================
+   ENFORCE LIGHT THEME OVERRIDES FOR DARK-MODE DEVICES
+   ========================================================= */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: light !important;
+        -webkit-color-scheme: light !important;
+        --bg: #f5f5f7 !important;
+        --surface: #ffffff !important;
+        --surface-alt: #fbfbfd !important;
+        --text-primary: #1d1d1f !important;
+        --text-secondary: #6e6e73 !important;
+        --text-tertiary: #94a3b8 !important;
+        --border: #e5e5ea !important;
+        --border-strong: #d2d2d7 !important;
+        --accent: #0f766e !important;
+        --accent-strong: #0b5c56 !important;
+        --accent-soft: #e6f7f4 !important;
+    }
+
+    body,
+    .stApp,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stMain"] {
+        color-scheme: light !important;
+        -webkit-color-scheme: light !important;
+        background-color: #f5f5f7 !important;
+        color: #1d1d1f !important;
+    }
+
+    [data-testid="stSidebar"] {
+        background-color: #ffffff !important;
+        color: #1d1d1f !important;
+    }
+
+    [data-testid="stHeader"] {
+        background-color: transparent !important;
+        color: #1d1d1f !important;
+    }
+
+    [data-testid="stTextInput"] input,
+    [data-testid="stNumberInput"] input,
+    [data-testid="stTextArea"] textarea,
+    [data-baseweb="select"] > div,
+    [data-baseweb="popover"] div,
+    [data-baseweb="menu"],
+    ul[role="listbox"],
+    li[role="option"] {
+        background-color: #ffffff !important;
+        color: #1d1d1f !important;
+    }
+
+    li[role="option"]:hover,
+    li[role="option"][aria-selected="true"] {
+        background-color: #e6f7f4 !important;
+        color: #0b5c56 !important;
+    }
+}
+
