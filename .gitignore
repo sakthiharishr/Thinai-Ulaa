@@ -17,3 +17,8 @@ _backup_before_scraper_fix/
 .ralphy/
 .deepeval/
 *.db.bak*
+
+
+# Local project insights - do not upload to GitHub
+Thinai_Ulaa_Insights.ipynb
+visualizations/
