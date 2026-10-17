@@ -1,6 +1,6 @@
-# Smart Tamilnadu Tourism
+# Thinai Ulaa
 
-Smart Tamilnadu Tourism is an intelligent tourism platform designed to help users discover tourist destinations across Tamil Nadu, get personalized recommendations, estimate crowd levels, plan itineraries, calculate travel budgets, and interact with a tourism chatbot.
+Thinai Ulaa is an intelligent tourism platform designed to help users discover tourist destinations across Tamil Nadu, get personalized recommendations, estimate crowd levels, plan itineraries, calculate travel budgets, and interact with a tourism chatbot.
 
 ## Features
 
