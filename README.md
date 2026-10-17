@@ -21,7 +21,7 @@ Thinai Ulaa is an intelligent tourism platform designed to help users discover t
 ## Project Structure
 
 ```text
-Smart Tamilnadu Tourism/
+Thinai Ulaa/
 │
 ├── app.py
 ├── requirements.txt
