@@ -1,8 +1,8 @@
-# Smart Tamilnadu Tourism - Algorithms
+# Thinai Ulaa - Algorithms
 
 ## 1. Overview
 
-Smart Tamilnadu Tourism uses multiple algorithms and scoring techniques to provide intelligent tourism recommendations, nearby-place discovery, crowd prediction, itinerary generation, route optimization and budget estimation.
+Thinai Ulaa uses multiple algorithms and scoring techniques to provide intelligent tourism recommendations, nearby-place discovery, crowd prediction, itinerary generation, route optimization and budget estimation.
 
 The main algorithmic components are:
 

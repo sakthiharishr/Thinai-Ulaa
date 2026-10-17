@@ -1,8 +1,8 @@
-# Smart Tamilnadu Tourism - Database Schema
+# Thinai Ulaa - Database Schema
 
 ## 1. Overview
 
-Smart Tamilnadu Tourism uses SQLite as the primary database.
+Thinai Ulaa uses SQLite as the primary database.
 
 Database file:
 

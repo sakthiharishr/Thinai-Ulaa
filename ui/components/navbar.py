@@ -15,7 +15,7 @@ def render_navbar(active_page="Explore"):
             <div class="navbar-brand">
                 <div>
                     <p class="navbar-title">
-                        Smart Tamilnadu Tourism
+                        Thinai Ulaa
                     </p>
                     <p class="navbar-subtitle">
                         Discover • Plan • Explore

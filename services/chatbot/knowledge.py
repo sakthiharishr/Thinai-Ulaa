@@ -9,7 +9,7 @@ from database.queries import (
 
 KNOWLEDGE = {
     "greeting": (
-        "Welcome to Smart Tamilnadu Tourism! "
+        "Welcome to Thinai Ulaa! "
         "I can help you explore tourist destinations, "
         "plan trips, estimate budgets and discover "
         "Tamil Nadu's cultural attractions."

@@ -1,6 +1,6 @@
-import streamlit.components.v1 as components
+import streamlit as st
 
-# Runs inside Streamlit's component iframe, which is same-origin, so it can
+# Runs inside Streamlit's iframe, which is same-origin, so it can
 # reach into the parent document to animate elements Streamlit itself
 # rendered. Elements marked class="reveal" fade/slide in the first time they
 # scroll into view; common page sections (cards, metrics, timeline stops,
@@ -10,6 +10,16 @@ import streamlit.components.v1 as components
 _SCROLL_REVEAL_HTML = """
 <script>
 (function () {
+    try {
+        if (window.frameElement) {
+            window.frameElement.style.display = "none";
+            var container = window.frameElement.closest("[data-testid='stIFrame'], [data-testid='element-container']");
+            if (container) {
+                container.style.display = "none";
+            }
+        }
+    } catch (e) {}
+
     try {
         var doc = window.parent.document;
         var ParentIntersectionObserver = window.parent.IntersectionObserver;
@@ -66,4 +76,9 @@ _SCROLL_REVEAL_HTML = """
 
 
 def inject_scroll_reveal():
-    components.html(_SCROLL_REVEAL_HTML, height=0, width=0)
+    if hasattr(st, "iframe"):
+        st.iframe(_SCROLL_REVEAL_HTML, height="content", width="content")
+    else:
+        import streamlit.components.v1 as components
+        components.html(_SCROLL_REVEAL_HTML, height=0, width=0)
+

@@ -173,7 +173,7 @@ def _resolve_coordinates(place):
 
         geocoder = Nominatim(
             user_agent=(
-                "smart-tamilnadu-tourism-"
+                "Thinai-Ulaa-"
                 "recommendations"
             )
         )

@@ -95,7 +95,7 @@ def main():
     """
 
     st.set_page_config(
-        page_title="Smart Tamilnadu Tourism",
+        page_title="Thinai Ulaa",
         page_icon="🌴",
         layout="wide",
         initial_sidebar_state="expanded",

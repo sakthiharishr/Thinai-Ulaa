@@ -1,4 +1,4 @@
-# Smart Tamilnadu Tourism – Data Collection Policy
+# Thinai Ulaa – Data Collection Policy
 
 ## Scope
 The collector is designed for public tourism discovery across all 38 Tamil Nadu districts.

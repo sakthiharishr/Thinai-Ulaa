@@ -74,7 +74,7 @@ def refresh_status_from_source(place_id, source_url, source_name="Destination st
     Source pages are intentionally supplied per destination: not every tourism
     source publishes reliable real-time conditions, so this avoids guessing.
     """
-    response = requests.get(source_url, timeout=timeout, headers={"User-Agent": "SmartTamilnaduTourism/1.0"})
+    response = requests.get(source_url, timeout=timeout, headers={"User-Agent": "Thinai-Ulaa/1.0"})
     response.raise_for_status()
     text = " ".join(response.text.lower().split())
     if any(term in text for term in ("closed", "closure", "dry", "unsafe")):

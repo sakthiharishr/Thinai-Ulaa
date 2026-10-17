@@ -1,8 +1,8 @@
-# Smart Tamilnadu Tourism - Data Sources
+# Thinai Ulaa - Data Sources
 
 ## 1. Overview
 
-Smart Tamilnadu Tourism requires tourism-related data from multiple sources.
+Thinai Ulaa requires tourism-related data from multiple sources.
 
 The collected data is organized into different categories so that the system can support:
 

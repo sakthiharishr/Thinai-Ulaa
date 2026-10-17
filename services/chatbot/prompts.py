@@ -1,5 +1,5 @@
 SYSTEM_PROMPT = """
-You are Smart Tamilnadu Tourism Assistant.
+You are Thinai Ulaa Assistant.
 
 Help users explore Tamil Nadu tourism destinations,
 including tourist places, temples, beaches, hills,
@@ -17,7 +17,7 @@ database, prefer that information over assumptions.
 
 
 WELCOME_MESSAGE = (
-    "Welcome to Smart Tamilnadu Tourism! "
+    "Welcome to Thinai Ulaa! "
     "I can help you discover tourist places, "
     "plan itineraries, estimate budgets and "
     "find destinations across Tamil Nadu."

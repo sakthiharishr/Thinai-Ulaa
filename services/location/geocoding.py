@@ -4,7 +4,7 @@ from geopy.geocoders import Nominatim
 
 
 _GEOCODER = Nominatim(
-    user_agent="smart_tamilnadu_tourism"
+    user_agent="Thinai-Ulaa"
 )
 
 

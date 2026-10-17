@@ -925,7 +925,7 @@ def render_itinerary_page():
     render_page_hero(
         "Trip planning",
         "Plan your itinerary",
-        "Choose your places yourself or let Smart Tamilnadu Tourism create a personalized plan for you.",
+        "Choose your places yourself or let Thinai Ulaa create a personalized plan for you.",
         photo_categories=[
             "Heritage",
             "Historical",

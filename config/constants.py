@@ -1,4 +1,4 @@
-APP_NAME = "Smart Tamilnadu Tourism"
+APP_NAME = "Thinai Ulaa"
 APP_VERSION = "1.0.0"
 
 DEFAULT_COUNTRY = "India"

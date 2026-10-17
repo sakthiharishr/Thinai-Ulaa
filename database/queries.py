@@ -1684,7 +1684,7 @@ def test_queries():
 
     print("=" * 40)
     print(
-        "SMART TAMILNADU TOURISM - QUERY TEST"
+        "THINAI ULAA - QUERY TEST"
     )
     print("=" * 40)
 

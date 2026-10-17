@@ -27,8 +27,8 @@ from urllib3.util.retry import Retry
 logger = logging.getLogger(__name__)
 
 USER_AGENT = (
-    "SmartTamilnaduTourism/5.0 (tourism data collection; "
-    "https://github.com/smart-tamilnadu-tourism)"
+    "Thinai-Ulaa/5.0 (tourism data collection; "
+    "https://github.com/Thinai-Ulaa)"
 )
 DEFAULT_TIMEOUT = (10, 60)  # (connect, read) seconds
 RETRY_STATUSES = (429, 500, 502, 503, 504)

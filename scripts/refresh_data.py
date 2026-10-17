@@ -38,7 +38,7 @@ def _print_report(report):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Collect Smart Tamilnadu Tourism data")
+    parser = argparse.ArgumentParser(description="Collect Thinai Ulaa data")
     parser.add_argument("--reset", action="store_true", help="Clear collected tourism records before rebuilding")
     parser.add_argument("--sources", nargs="+", choices=SOURCE_KEYS, help="Only run these sources")
     parser.add_argument("--skip", nargs="+", choices=SOURCE_KEYS, default=(), help="Sources to leave out")

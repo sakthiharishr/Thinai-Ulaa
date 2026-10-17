@@ -1,1 +1,1 @@
-"""Database package for Smart Tamilnadu Tourism."""
+"""Database package for Thinai Ulaa."""

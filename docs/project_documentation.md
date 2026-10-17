@@ -1,12 +1,12 @@
-# Smart Tamilnadu Tourism - Project Documentation
+# Thinai Ulaa - Project Documentation
 
 ## 1. Project Title
 
-Smart Tamilnadu Tourism
+Thinai Ulaa
 
 ## 2. Project Overview
 
-Smart Tamilnadu Tourism is an intelligent tourism management and recommendation application developed using Python and Streamlit.
+Thinai Ulaa is an intelligent tourism management and recommendation application developed using Python and Streamlit.
 
 The system helps users explore tourist destinations across Tamil Nadu and provides personalized tourism assistance based on location, interests, ratings, popularity, crowd conditions, trip duration and budget.
 
@@ -18,7 +18,7 @@ Tourists often need to search multiple platforms to find suitable destinations, 
 
 Existing tourism applications may provide basic destination information but may not combine personalized recommendations, nearby-place discovery, crowd prediction, itinerary generation and budget estimation in one system.
 
-Smart Tamilnadu Tourism aims to provide an integrated solution for discovering and planning tourism activities across Tamil Nadu.
+Thinai Ulaa aims to provide an integrated solution for discovering and planning tourism activities across Tamil Nadu.
 
 ## 4. Proposed Solution
 
