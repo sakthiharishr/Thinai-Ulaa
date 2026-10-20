@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 .streamlit/secrets.toml
 *.png
+!assets/*.png
 .playwright-mcp/
 database/tourism.db.bak
 database/tourism.db.bak2

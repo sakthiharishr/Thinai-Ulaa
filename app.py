@@ -35,33 +35,21 @@ def load_css():
         "responsive.css",
     ]
 
+    combined_css = []
     for css_file in css_files:
-
-        css_path = (
-            styles_dir
-            / css_file
-        )
-
+        css_path = styles_dir / css_file
         if not css_path.exists():
             continue
-
         try:
-
-            css = css_path.read_text(
-                encoding="utf-8"
-            )
-
-            st.markdown(
-                f"""
-                <style>
-                {css}
-                </style>
-                """,
-                unsafe_allow_html=True,
-            )
-
+            combined_css.append(css_path.read_text(encoding="utf-8"))
         except Exception:
             continue
+
+    if combined_css:
+        st.markdown(
+            f"<style>\n{'\n'.join(combined_css)}\n</style>",
+            unsafe_allow_html=True,
+        )
 
 
 initialize_database()
@@ -94,9 +82,10 @@ def main():
     Main Streamlit application entry point.
     """
 
+    favicon_path = Path(__file__).resolve().parent / "assets" / "favicon.png"
     st.set_page_config(
         page_title="Thinai Ulaa",
-        page_icon="🌴",
+        page_icon=str(favicon_path) if favicon_path.exists() else "🌴",
         layout="wide",
         initial_sidebar_state="expanded",
     )

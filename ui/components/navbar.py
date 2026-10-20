@@ -1,4 +1,20 @@
+import base64
+import functools
+from pathlib import Path
+
 import streamlit as st
+
+
+@functools.lru_cache(maxsize=1)
+def _get_logo_b64() -> str:
+    assets_dir = Path(__file__).resolve().parent.parent.parent / "assets"
+    for name in ("logo_web.png", "logo_round.png", "logo.png", "logo.jpg"):
+        candidate = assets_dir / name
+        if candidate.exists():
+            mime = "image/jpeg" if candidate.suffix.lower() in (".jpg", ".jpeg") else "image/png"
+            data = candidate.read_bytes()
+            return f"data:{mime};base64,{base64.b64encode(data).decode('utf-8')}"
+    return ""
 
 
 def render_navbar(active_page="Explore"):
@@ -9,11 +25,19 @@ def render_navbar(active_page="Explore"):
         "Chatbot",
     ]
 
+    logo_b64 = _get_logo_b64()
+    logo_html = (
+        f'<img src="{logo_b64}" class="navbar-logo" alt="Thinai Ulaa Logo" />'
+        if logo_b64
+        else ""
+    )
+
     st.markdown(
-        """
+        f"""
         <div class="navbar">
             <div class="navbar-brand">
-                <div>
+                {logo_html}
+                <div class="navbar-brand-text">
                     <p class="navbar-title">
                         Thinai Ulaa
                     </p>

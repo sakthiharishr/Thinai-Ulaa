@@ -49,6 +49,25 @@
 
 @media (max-width: 768px) {
 
+    /* Navbar */
+
+    .navbar-brand {
+        gap: 0.85rem;
+    }
+
+    .navbar-logo {
+        width: 54px;
+        height: 54px;
+    }
+
+    .navbar-title {
+        font-size: 28px !important;
+    }
+
+    .navbar-subtitle {
+        font-size: 10px !important;
+    }
+
     .main {
         padding: 0 1rem 1rem 1rem;
     }
@@ -115,6 +134,21 @@
    ========================================================= */
 
 @media (max-width: 576px) {
+
+    /* Navbar */
+
+    .navbar-logo {
+        width: 44px;
+        height: 44px;
+    }
+
+    .navbar-title {
+        font-size: 25px !important;
+    }
+
+    .navbar-subtitle {
+        font-size: 9.5px !important;
+    }
 
     .main {
         padding: 0 0.6rem 1rem 0.6rem;

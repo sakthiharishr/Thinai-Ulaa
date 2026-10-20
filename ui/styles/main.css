@@ -284,14 +284,32 @@ body.js-scroll-ready .reveal-3d.in-view {
     padding: 0 2rem 2rem 2rem;
 }
 
-/* Use most of a wide screen: a fixed 1400px column left large empty
-   strips on 1920px displays. */
+/* Eliminate large top whitespace */
+header[data-testid="stHeader"] {
+    background: transparent !important;
+    height: 1.5rem !important;
+    min-height: 1.5rem !important;
+}
+
+.stMainBlockContainer,
+[data-testid="stMainBlockContainer"],
+[data-testid="stAppViewBlockContainer"],
+.main .block-container,
 .block-container {
     max-width: min(1760px, 94vw);
-    padding-top: 1.25rem;
+    padding-top: 0.5rem !important;
     padding-left: 2.5rem;
     padding-right: 2.5rem;
     animation: fadeIn 0.5s var(--ease);
+}
+
+div[data-testid="stElementContainer"]:has(> style),
+div[data-testid="stElementContainer"]:empty {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 h1, h2, h3, h4, h5, h6 {

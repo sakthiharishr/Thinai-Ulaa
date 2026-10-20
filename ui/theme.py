@@ -16,6 +16,31 @@ def load_theme():
     st.markdown(
         """
         <style>
+        /* Tighten top padding and hide empty style/script element wrappers */
+        header[data-testid="stHeader"] {
+            background: transparent !important;
+            height: 1.5rem !important;
+            min-height: 1.5rem !important;
+        }
+
+        .stMainBlockContainer,
+        [data-testid="stMainBlockContainer"],
+        [data-testid="stAppViewBlockContainer"],
+        .main .block-container,
+        .block-container {
+            padding-top: 0.5rem !important;
+            margin-top: 0 !important;
+        }
+
+        div[data-testid="stElementContainer"]:has(> style),
+        div[data-testid="stElementContainer"]:empty {
+            display: none !important;
+            height: 0 !important;
+            min-height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
         :root {
             /* Force light color scheme for browsers and user-agents */
             color-scheme: light !important;
