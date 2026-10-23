@@ -82,7 +82,7 @@ def render_explore_page():
     _render_editorial_hero()
 
     st.markdown('<div class="ghost-toolbar-label reveal">Find destinations near you</div>', unsafe_allow_html=True)
-    col_manual, col_gps, col_refresh = st.columns([4, 1, 1])
+    col_manual, col_gps, col_refresh = st.columns([3.6, 1.2, 1.2])
     with col_manual:
         location_name = st.text_input(
             "Your location",
@@ -90,7 +90,12 @@ def render_explore_page():
             label_visibility="collapsed",
         )
     with col_gps:
-        if st.button("📍 GPS", use_container_width=True, help="Use this device's location"):
+        if st.button(
+            "📍 GPS",
+            use_container_width=True,
+            help="Use this device's location",
+            key="explore_gps_button",
+        ):
             start_gps_request()
     with col_refresh:
         refresh_requested = st.button("↻ Refresh", use_container_width=True)
@@ -140,7 +145,12 @@ def render_explore_page():
     if st.session_state.get("nearby_results"):
         col_note, col_clear = st.columns([5, 1])
         with col_clear:
-            if st.button("✕ Clear", use_container_width=True, help="Show all destinations again"):
+            if st.button(
+                "✕ Clear",
+                use_container_width=True,
+                help="Show all destinations again",
+                key="explore_clear_button",
+            ):
                 for key in ("nearby_results", "nearby_context", "nearby_label"):
                     st.session_state.pop(key, None)
                 clear_current_location()

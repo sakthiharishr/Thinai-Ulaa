@@ -92,8 +92,22 @@ def main():
 
     apply_migrations()
 
+    # Read and persist theme from query_params or session_state
+    url_theme = st.query_params.get("theme")
+    if "theme" not in st.session_state:
+        if url_theme in ("light", "dark"):
+            st.session_state["theme"] = url_theme
+        else:
+            st.session_state["theme"] = "light"
+    elif url_theme and url_theme in ("light", "dark") and url_theme != st.session_state["theme"]:
+        st.session_state["theme"] = url_theme
+
+    current_theme = st.session_state.get("theme", "light")
+    if st.query_params.get("theme") != current_theme:
+        st.query_params["theme"] = current_theme
+
     # Global theme variables
-    load_theme()
+    load_theme(theme=current_theme)
 
     # Application CSS
     load_css()

@@ -93,6 +93,12 @@
     color: #ffffff;
 }
 
+.chat-bubble.user,
+.chat-bubble.user * {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
 
 /* =========================================================
    CHAT QUICK-PROMPT CHIPS

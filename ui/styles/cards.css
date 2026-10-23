@@ -9,43 +9,43 @@
 .place-card-title {
     font-size: 21px;
     font-weight: 750;
-    color: #172033;
+    color: var(--text-primary);
     margin-bottom: 0.35rem;
 }
 
 .place-card-location {
     font-size: 14px;
-    color: #64748b;
+    color: var(--text-secondary);
     margin-bottom: 0.7rem;
 }
 
 .place-card-description {
     font-size: 14px;
     line-height: 1.6;
-    color: #475569;
+    color: var(--text-secondary);
 }
 
 .place-card-rating {
     font-size: 15px;
     font-weight: 700;
-    color: #b45309;
+    color: #f59e0b;
 }
 
 .place-card-rating-count {
     font-size: 12px;
     font-weight: 500;
-    color: #94a3b8;
+    color: var(--text-tertiary);
 }
 
 .place-card-rating-empty {
     font-size: 13px;
     font-weight: 600;
-    color: #94a3b8;
+    color: var(--text-tertiary);
 }
 
 .place-card-distance {
     font-size: 13px;
-    color: #64748b;
+    color: var(--text-secondary);
 }
 
 .place-card-footer {
@@ -54,7 +54,7 @@
     align-items: center;
     margin-top: 1rem;
     padding-top: 0.8rem;
-    border-top: 1px solid #eef1f5;
+    border-top: 1px solid var(--border);
 }
 
 .rating-stars {
@@ -73,39 +73,39 @@
 }
 
 .crowd-low {
-    background: #dcfce7;
-    color: #166534;
+    background: rgba(34, 197, 94, 0.16);
+    color: #22c55e;
 }
 
 .crowd-medium {
-    background: #fef3c7;
-    color: #92400e;
+    background: rgba(245, 158, 11, 0.16);
+    color: #f59e0b;
 }
 
 .crowd-high {
-    background: #fee2e2;
-    color: #991b1b;
+    background: rgba(239, 68, 68, 0.16);
+    color: #ef4444;
 }
 
 .budget-card {
-    background: white;
+    background: var(--surface);
     border-radius: 18px;
     padding: 1.4rem;
-    border: 1px solid #e6eaf0;
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
 }
 
 .budget-total {
     font-size: 32px;
     font-weight: 800;
-    color: #0f766e;
+    color: var(--accent);
 }
 
 .budget-item {
     display: flex;
     justify-content: space-between;
     padding: 0.65rem 0;
-    border-bottom: 1px solid #eef1f5;
+    border-bottom: 1px solid var(--border);
     font-size: 14px;
 }
 
@@ -114,17 +114,17 @@
 }
 
 .budget-label {
-    color: #64748b;
+    color: var(--text-secondary);
 }
 
 .budget-value {
     font-weight: 700;
-    color: #172033;
+    color: var(--text-primary);
 }
 
 .place-card-status {
     font-size: 13px;
-    color: #0f766e;
+    color: var(--accent);
     font-weight: 650;
     margin-top: 0.65rem;
 }

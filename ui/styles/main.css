@@ -277,7 +277,6 @@ body.js-scroll-ready .reveal-3d.in-view {
 [data-testid="stMain"] {
     background-color: var(--bg) !important;
     color: var(--text-primary) !important;
-    color-scheme: light !important;
 }
 
 .main {
@@ -310,6 +309,36 @@ div[data-testid="stElementContainer"]:empty {
     min-height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
+}
+
+/* Collapse zero-height / script-only iframes (theme toggle & scroll reveal) */
+iframe[height="0"],
+iframe.stIFrame,
+iframe[data-testid="stIFrame"],
+div[data-testid="stCustomComponentV1"]:has(iframe[height="0"]),
+.st-key-theme_js_runner,
+div[class*="st-key-theme_js_runner"],
+div[data-testid="stElementContainer"]:has(iframe.stIFrame),
+div[data-testid="stElementContainer"]:has(iframe[data-testid="stIFrame"]),
+div[data-testid="stElementContainer"]:has(div.st-key-theme_js_runner) {
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    line-height: 0 !important;
+    overflow: hidden !important;
+}
+
+iframe.stIFrame,
+iframe[data-testid="stIFrame"] {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -723,13 +752,29 @@ p, span, div, label {
     transform: scale(0.98);
 }
 
+.stButton > button * {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    color: inherit !important;
+}
+
+.stButton > button p,
+.stButton > button span,
+.stButton > button div {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    color: inherit !important;
+}
+
 .stButton > button[kind="primary"] {
     background: var(--accent-gradient) !important;
     border: none !important;
     color: #ffffff !important;
-
-    font-weight: 600;
-
+    font-weight: 600 !important;
     box-shadow: 0 8px 20px rgba(15, 118, 110, 0.25);
 }
 
@@ -738,18 +783,52 @@ p, span, div, label {
     transform: translateY(-1px);
 }
 
+.stButton > button[kind="primary"]:focus,
+.stButton > button[kind="primary"]:focus-visible,
+.stButton > button[kind="primary"]:active {
+    background: var(--accent-gradient) !important;
+    color: #ffffff !important;
+}
+
 .stButton > button[kind="secondary"] {
     background: var(--surface) !important;
     border: 1px solid var(--border-strong) !important;
     color: var(--text-primary) !important;
-
-    font-weight: 600;
+    -webkit-text-fill-color: var(--text-primary) !important;
+    font-weight: 600 !important;
 }
 
 .stButton > button[kind="secondary"]:hover {
     border-color: var(--accent) !important;
-    color: var(--accent) !important;
+    color: var(--accent-strong) !important;
+    -webkit-text-fill-color: var(--accent-strong) !important;
     background: var(--accent-soft) !important;
+}
+
+.stButton > button[kind="secondary"]:focus,
+.stButton > button[kind="secondary"]:focus-visible,
+.stButton > button[kind="secondary"]:active {
+    background: var(--surface) !important;
+    color: var(--text-primary) !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+    border-color: var(--accent) !important;
+    box-shadow: none !important;
+}
+
+:root[data-theme="dark"] .st-key-explore_gps_button .stButton > button,
+:root[data-theme="dark"] .st-key-explore_clear_button .stButton > button {
+    background: var(--surface) !important;
+    background-color: var(--surface) !important;
+    border: 1px solid var(--border-strong) !important;
+    color: var(--text-primary) !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+}
+
+:root[data-theme="dark"] .st-key-explore_gps_button button,
+:root[data-theme="dark"] .st-key-explore_clear_button button {
+    background: var(--surface) !important;
+    color: var(--text-primary) !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
 }
 
 
@@ -771,7 +850,7 @@ p, span, div, label {
 
 
 /* =========================================================
-   INPUT FIELDS
+   INPUT FIELDS — text always readable in both light and dark mode
    ========================================================= */
 
 .stTextInput input,
@@ -780,8 +859,8 @@ p, span, div, label {
     border-radius: var(--radius-sm);
     background-color: var(--surface) !important;
     color: var(--text-primary) !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
     border: 1px solid var(--border-strong) !important;
-    color-scheme: light !important;
 }
 
 .stSelectbox div {
@@ -797,35 +876,204 @@ p, span, div, label {
     transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
     background-color: var(--surface) !important;
     color: var(--text-primary) !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
     border: 1px solid var(--border-strong) !important;
-    color-scheme: light !important;
+}
+
+/* placeholder text in every input/textarea */
+.stTextInput input::placeholder,
+.stNumberInput input::placeholder,
+.stTextArea textarea::placeholder {
+    color: var(--text-secondary) !important;
+    -webkit-text-fill-color: var(--text-secondary) !important;
+    opacity: 0.8 !important;
 }
 
 [data-baseweb="select"] input {
     color: var(--text-primary) !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
 }
 
-[data-baseweb="select"] * {
-    color: var(--text-primary);
+[data-baseweb="select"] *,
+[data-baseweb="select"] span,
+[data-baseweb="select"] div {
+    color: var(--text-primary) !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+}
+
+/* Placeholder / prompt text inside select boxes */
+[data-baseweb="select"] [data-placeholder="true"],
+[data-baseweb="select"] [aria-placeholder] {
+    color: var(--text-secondary) !important;
+    -webkit-text-fill-color: var(--text-secondary) !important;
+    opacity: 0.8 !important;
 }
 
 [data-baseweb="select"] svg {
     fill: var(--text-secondary) !important;
 }
 
+/* Widget labels (the little label above each input) */
+[data-testid="stWidgetLabel"] label,
+[data-testid="stWidgetLabel"] label p,
+[data-testid="stWidgetLabel"] p,
+[data-testid="stWidgetLabel"] span {
+    color: var(--text-primary) !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+}
+
+/* Step-up / step-down buttons on number inputs */
+[data-testid="stNumberInputStepDown"],
+[data-testid="stNumberInputStepUp"] {
+    background: transparent !important;
+    color: var(--text-primary) !important;
+}
+
+/* Number input container text */
+[data-testid="stNumberInputContainer"],
+[data-testid="stNumberInputContainer"] * {
+    color: var(--text-primary) !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+}
+
+/* Radio and Checkbox labels */
+[data-testid="stRadio"] label,
+[data-testid="stRadio"] label p,
+[data-testid="stCheckbox"] label,
+[data-testid="stCheckbox"] label p,
+label[data-baseweb="checkbox"],
+label[data-baseweb="radio"] {
+    color: var(--text-primary) !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+}
+
+/* Caption / helper text */
+[data-testid="stCaptionContainer"] p,
+[data-testid="stCaptionContainer"] span {
+    color: var(--text-secondary) !important;
+    -webkit-text-fill-color: var(--text-secondary) !important;
+}
+
+/* Alert / notification text (info, warning, error, success) */
+[data-testid="stNotification"] p,
+[data-testid="stNotification"] span,
+[data-testid="stNotification"] li,
+[data-testid="stAlert"] p,
+[data-testid="stAlert"] span {
+    color: inherit !important;
+}
+
+/* Expander title and content text */
+[data-testid="stExpander"] summary p,
+[data-testid="stExpander"] summary span {
+    color: var(--text-primary) !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+}
+
+[data-testid="stExpander"] summary svg {
+    fill: var(--text-primary) !important;
+}
+
+/* General paragraph and list text in the app — use inherit so intentionally
+   coloured elements (e.g. accent headings) keep their own colour. */
+[data-testid="stMarkdownContainer"] p {
+    color: var(--text-primary);
+}
+
+[data-testid="stMarkdownContainer"] li {
+    color: var(--text-primary);
+}
+
 div[data-baseweb="popover"],
+div[data-baseweb="popover"] *,
 div[data-baseweb="menu"],
+div[data-baseweb="menu"] *,
 ul[role="listbox"],
+ul[role="listbox"] * {
+    background-color: var(--surface) !important;
+    color: var(--text-primary) !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+}
+
+div[data-baseweb="popover"] > div {
+    border: 1px solid var(--border) !important;
+    box-shadow: var(--shadow-md) !important;
+    border-radius: var(--radius-sm) !important;
+    background-color: var(--surface) !important;
+}
+
 li[role="option"] {
     background-color: var(--surface) !important;
     color: var(--text-primary) !important;
-    color-scheme: light !important;
 }
 
 li[role="option"]:hover,
-li[role="option"][aria-selected="true"] {
-    background-color: var(--accent-soft) !important;
+li[role="option"][aria-selected="true"],
+li[role="option"]:hover *,
+li[role="option"][aria-selected="true"] * {
+    background-color: var(--surface-alt) !important;
     color: var(--accent-strong) !important;
+    -webkit-text-fill-color: var(--accent-strong) !important;
+}
+
+/* =========================================================
+   TOOLTIPS (Buttons and widgets with help=..., e.g., GPS, Clear)
+   ========================================================= */
+
+.react-aria-Tooltip,
+[role="tooltip"],
+[data-testid="stTooltipContent"],
+[data-testid="stTooltipErrorContent"],
+.stTooltipContent,
+.stTooltipErrorContent,
+div.stTooltipContent,
+div[class*="stTooltipContent"] {
+    background-color: var(--surface) !important;
+    background: var(--surface) !important;
+    color: var(--text-primary) !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+    border: 1px solid var(--border-strong) !important;
+    box-shadow: var(--shadow-md) !important;
+    border-radius: var(--radius-sm) !important;
+}
+
+.react-aria-Tooltip *,
+[role="tooltip"] *,
+[data-testid="stTooltipContent"] *,
+[data-testid="stTooltipErrorContent"] *,
+.stTooltipContent *,
+.stTooltipErrorContent *,
+div.stTooltipContent *,
+div[class*="stTooltipContent"] * {
+    color: var(--text-primary) !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+}
+
+:root[data-theme="dark"] .react-aria-Tooltip,
+:root[data-theme="dark"] [role="tooltip"],
+:root[data-theme="dark"] [data-testid="stTooltipContent"],
+:root[data-theme="dark"] [data-testid="stTooltipErrorContent"],
+:root[data-theme="dark"] .stTooltipContent,
+:root[data-theme="dark"] .stTooltipErrorContent,
+:root[data-theme="dark"] div.stTooltipContent,
+:root[data-theme="dark"] div[class*="stTooltipContent"] {
+    background-color: #151c26 !important;
+    background: #151c26 !important;
+    color: #f8fafc !important;
+    -webkit-text-fill-color: #f8fafc !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+}
+
+:root[data-theme="dark"] .react-aria-Tooltip *,
+:root[data-theme="dark"] [role="tooltip"] *,
+:root[data-theme="dark"] [data-testid="stTooltipContent"] *,
+:root[data-theme="dark"] [data-testid="stTooltipErrorContent"] *,
+:root[data-theme="dark"] .stTooltipContent *,
+:root[data-theme="dark"] .stTooltipErrorContent *,
+:root[data-theme="dark"] div.stTooltipContent *,
+:root[data-theme="dark"] div[class*="stTooltipContent"] * {
+    color: #f8fafc !important;
+    -webkit-text-fill-color: #f8fafc !important;
 }
 
 /* =========================================================
@@ -836,8 +1084,8 @@ li[role="option"][aria-selected="true"] {
     border: 1px solid var(--border-strong) !important;
     background: var(--surface) !important;
     color: var(--text-primary) !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
     padding: 0.7rem 0.9rem;
-    color-scheme: light !important;
 }
 
 [data-testid="stTextInput"] input:focus {
@@ -1463,21 +1711,66 @@ hr {
     transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
 
+[class*="st-key-planner_panel"] [data-baseweb="select"] *,
+[class*="st-key-planner_panel"] [data-baseweb="input"] *,
+[class*="st-key-planner_panel"] [data-testid="stNumberInputContainer"] * {
+    color: var(--text-primary) !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+}
+
 [class*="st-key-planner_panel"] [data-baseweb="select"] > div:focus-within,
 [class*="st-key-planner_panel"] [data-baseweb="input"]:focus-within {
     border-color: var(--accent) !important;
     box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
-/* Selected interests appear as teal chips. */
-[class*="st-key-planner_panel"] [data-baseweb="tag"] {
+/* Selected interests appear as teal chips with white text. */
+[class*="st-key-planner_panel"] [data-baseweb="tag"],
+[class*="st-key-planner_panel"] [data-tag],
+.stMultiSelect [data-tag],
+.stMultiSelect span[data-tag],
+span[data-tag],
+span[data-tag] * {
     border-radius: var(--radius-pill) !important;
-    background: var(--accent-soft) !important;
-    color: var(--accent-strong) !important;
+    background: var(--accent) !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
 }
 
-[class*="st-key-planner_panel"] [data-baseweb="tag"] span {
-    color: var(--accent-strong) !important;
+[class*="st-key-planner_panel"] [data-baseweb="tag"] span,
+[class*="st-key-planner_panel"] [data-baseweb="tag"] *,
+[class*="st-key-planner_panel"] [data-tag],
+[class*="st-key-planner_panel"] [data-tag] *,
+[class*="st-key-planner_panel"] [data-tag] span,
+.stMultiSelect [data-tag],
+.stMultiSelect [data-tag] *,
+.stMultiSelect [data-tag] span,
+.stMultiSelect [data-baseweb="tag"],
+.stMultiSelect [data-baseweb="tag"] * {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+[class*="st-key-planner_panel"] [data-baseweb="tag"] svg,
+[class*="st-key-planner_panel"] [data-tag] svg,
+.stMultiSelect [data-tag] svg,
+.stMultiSelect [data-tag] button,
+.stMultiSelect [data-tag] button * {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+.st-key-planner_panel_itinerary [data-baseweb="tag"],
+.st-key-planner_panel_itinerary [data-baseweb="tag"] *,
+.st-key-planner_panel_itinerary [data-tag],
+.st-key-planner_panel_itinerary [data-tag] *,
+.st-key-planner_panel_recommendations [data-baseweb="tag"],
+.st-key-planner_panel_recommendations [data-baseweb="tag"] *,
+.st-key-planner_panel_recommendations [data-tag],
+.st-key-planner_panel_recommendations [data-tag] * {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
 }
 
 /* Mode choice: pills instead of radio circles. */
@@ -1748,64 +2041,3 @@ hr {
     font-size: 13px;
     color: var(--text-secondary, #64748b);
 }
-
-/* =========================================================
-   ENFORCE LIGHT THEME OVERRIDES FOR DARK-MODE DEVICES
-   ========================================================= */
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        color-scheme: light !important;
-        -webkit-color-scheme: light !important;
-        --bg: #f5f5f7 !important;
-        --surface: #ffffff !important;
-        --surface-alt: #fbfbfd !important;
-        --text-primary: #1d1d1f !important;
-        --text-secondary: #6e6e73 !important;
-        --text-tertiary: #94a3b8 !important;
-        --border: #e5e5ea !important;
-        --border-strong: #d2d2d7 !important;
-        --accent: #0f766e !important;
-        --accent-strong: #0b5c56 !important;
-        --accent-soft: #e6f7f4 !important;
-    }
-
-    body,
-    .stApp,
-    [data-testid="stAppViewContainer"],
-    [data-testid="stMain"] {
-        color-scheme: light !important;
-        -webkit-color-scheme: light !important;
-        background-color: #f5f5f7 !important;
-        color: #1d1d1f !important;
-    }
-
-    [data-testid="stSidebar"] {
-        background-color: #ffffff !important;
-        color: #1d1d1f !important;
-    }
-
-    [data-testid="stHeader"] {
-        background-color: transparent !important;
-        color: #1d1d1f !important;
-    }
-
-    [data-testid="stTextInput"] input,
-    [data-testid="stNumberInput"] input,
-    [data-testid="stTextArea"] textarea,
-    [data-baseweb="select"] > div,
-    [data-baseweb="popover"] div,
-    [data-baseweb="menu"],
-    ul[role="listbox"],
-    li[role="option"] {
-        background-color: #ffffff !important;
-        color: #1d1d1f !important;
-    }
-
-    li[role="option"]:hover,
-    li[role="option"][aria-selected="true"] {
-        background-color: #e6f7f4 !important;
-        color: #0b5c56 !important;
-    }
-}
-

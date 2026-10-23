@@ -14,7 +14,7 @@ def render_rating(rating, rating_count=0):
             """
             <div class="rating-stars">
                 ☆☆☆☆☆
-                <span style="color:#94a3b8;">Not yet rated</span>
+                <span style="color:var(--text-tertiary);">Not yet rated</span>
             </div>
             """,
             unsafe_allow_html=True,
@@ -43,7 +43,7 @@ def render_rating(rating, rating_count=0):
         f"""
         <div class="rating-stars">
             {stars}
-            <span style="color:#475569;">
+            <span style="color:var(--text-secondary);">
                 {rating:.1f}{count_text}
             </span>
         </div>
@@ -61,7 +61,7 @@ def render_rating_badge(rating):
     st.markdown(
         f"""
         <span class="badge"
-              style="background:#fff7ed;color:#b45309;">
+              style="background:rgba(245, 158, 11, 0.16);color:#f59e0b;font-weight:600;">
             ⭐ {rating:.1f}
         </span>
         """,

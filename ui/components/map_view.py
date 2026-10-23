@@ -57,7 +57,6 @@ def render_map_view(places, zoom=7, key="map_view"):
         return
 
     map_points = []
-
     for place in places:
         latitude = place.get("latitude")
         longitude = place.get("longitude")
@@ -86,11 +85,12 @@ def render_map_view(places, zoom=7, key="map_view"):
         return
 
     theme_key = f"{key}_theme"
+    default_tile = "Dark" if st.session_state.get("theme") == "dark" else "Street"
     theme = st.radio(
         "Map theme",
         options=list(MAP_TILES.keys()),
-        index=list(MAP_TILES).index(st.session_state.get(theme_key, "Street"))
-        if st.session_state.get(theme_key, "Street") in MAP_TILES else 0,
+        index=list(MAP_TILES).index(st.session_state.get(theme_key, default_tile))
+        if st.session_state.get(theme_key, default_tile) in MAP_TILES else 0,
         horizontal=True,
         key=theme_key,
         label_visibility="collapsed",

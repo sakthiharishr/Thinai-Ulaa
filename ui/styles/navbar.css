@@ -1,6 +1,6 @@
 /* =========================================================
    THINAI ULAA
-   Navbar Styles — Apple-inspired light theme
+   Navbar Styles — Original Brand Card with Adaptive Theme
    ========================================================= */
 
 
@@ -15,7 +15,7 @@
 
     padding: 0.9rem 1.6rem;
 
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--surface);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
 
@@ -55,7 +55,7 @@
     object-fit: cover;
 
     border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.95);
+    border: 2px solid var(--navbar-logo-border, rgba(255, 255, 255, 0.95));
     box-shadow: 0 4px 16px rgba(11, 92, 86, 0.2), 0 2px 6px rgba(0, 0, 0, 0.08);
 
     flex-shrink: 0;
@@ -103,12 +103,49 @@
 
 
 /* =========================================================
-   NAVBAR MENU (segmented-control style pill buttons)
+   THEME TOGGLE BUTTON (Small, Icon-Only Circle on Right)
    ========================================================= */
 
-/* The nav row is rendered via st.columns()+st.button() right below the
-   brand block; keep their labels on a single line at every width so
-   the longest item ("Recommendations") never wraps inside its pill. */
+button.theme-toggle-btn,
+div.navbar button.theme-toggle-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    border-radius: 50% !important;
+    background: var(--surface-alt) !important;
+    border: 1px solid var(--border-strong) !important;
+    color: var(--text-primary) !important;
+    font-size: 18px !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    box-shadow: var(--shadow-xs) !important;
+    transition: transform 0.2s var(--ease), background 0.2s var(--ease), border-color 0.2s var(--ease) !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    outline: none !important;
+    flex-shrink: 0 !important;
+}
+
+button.theme-toggle-btn:hover,
+div.navbar button.theme-toggle-btn:hover {
+    background: var(--accent-soft) !important;
+    border-color: var(--accent) !important;
+    transform: scale(1.08) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+button.theme-toggle-btn:active {
+    transform: scale(0.95) !important;
+}
+
+
+/* =========================================================
+   NAVBAR MENU (segmented-control style pill buttons)
+   ========================================================= */
 
 div[data-testid="stHorizontalBlock"]:has(button[kind="primary"], button[kind="secondary"]) {
     gap: 0.4rem;
@@ -149,6 +186,14 @@ div[data-testid="stHorizontalBlock"]:has(button[kind="primary"], button[kind="se
         font-size: 10px !important;
     }
 
+    button.theme-toggle-btn {
+        width: 34px !important;
+        height: 34px !important;
+        min-width: 34px !important;
+        max-width: 34px !important;
+        font-size: 16px !important;
+    }
+
     .stButton > button {
         font-size: 12px;
         padding-left: 0.4rem;
@@ -180,6 +225,14 @@ div[data-testid="stHorizontalBlock"]:has(button[kind="primary"], button[kind="se
 
     .navbar-subtitle {
         font-size: 9.5px !important;
+    }
+
+    button.theme-toggle-btn {
+        width: 30px !important;
+        height: 30px !important;
+        min-width: 30px !important;
+        max-width: 30px !important;
+        font-size: 14px !important;
     }
 
     .stButton > button {
@@ -235,7 +288,7 @@ div[data-testid="stHorizontalBlock"]:has(button[kind="primary"], button[kind="se
 }
 
 .st-key-main_nav .stButton > button[kind="primary"] {
-    color: #ffffff;
+    color: #ffffff !important;
     background: var(--accent-gradient);
     box-shadow: 0 6px 18px rgba(15, 118, 110, 0.32);
     animation: nav-pill-in 0.45s var(--ease) both;
